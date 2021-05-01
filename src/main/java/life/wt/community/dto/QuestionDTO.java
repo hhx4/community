@@ -1,12 +1,13 @@
-package life.wt.community.model;
+package life.wt.community.dto;
 
+import life.wt.community.model.User;
 import lombok.Data;
 
 /**
- * @created by wt at 2021-04-26 21:41
+ * @created by wt at 2021-04-28 18:45
  **/
 @Data
-public class Question {
+public class QuestionDTO {
     private int id;
     private String title;
     private String description;
@@ -17,5 +18,5 @@ public class Question {
     private Integer viewCount;
     private Integer commentCount;
     private Integer likeCount;
-
+    private User user;
 }

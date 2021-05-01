@@ -14,6 +14,8 @@ FASTJSON
 H2
 spring
 SPRING整合mybatis
+spring-boot-devtools
 ###工具
 git
 flyway
+lombok
