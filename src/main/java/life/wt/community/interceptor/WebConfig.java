@@ -12,7 +12,7 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
  * @created by wt at 2021-05-03 10:46
  **/
 @Configuration
-@EnableWebMvc
+//@EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
 
     @Autowired
