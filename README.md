@@ -15,7 +15,10 @@ H2
 spring
 SPRING整合mybatis
 spring-boot-devtools
+mybatis generate
+
 ###工具
 git
 flyway
 lombok
+postman

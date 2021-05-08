@@ -129,7 +129,7 @@ public class QuestionService {
             questionExample.createCriteria().andIdEqualTo(question.getId());
             int updated = questionMapper.updateByExampleSelective(updateQuestion, questionExample);
             if(updated != 1){
-                throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+                throw new CustomizeException( CustomizeErrorCode.QUESTION_NOT_FOUND);
             }
         }
     }

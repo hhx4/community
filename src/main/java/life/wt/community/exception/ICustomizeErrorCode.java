@@ -5,4 +5,6 @@ package life.wt.community.exception;
  **/
 public interface ICustomizeErrorCode {
     String getMessage();
+
+    Integer getCode();
 }
