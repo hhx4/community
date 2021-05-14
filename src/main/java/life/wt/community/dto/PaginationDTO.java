@@ -2,8 +2,7 @@ package life.wt.community.dto;
 
 import lombok.Data;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @created by wt at 2021-05-01 10:59
@@ -32,12 +31,19 @@ public class PaginationDTO {
             }
         }
 
-        showPrevious = page != 1;
+        showPrevious = page != 1 && page!=0;
 
         showNext = !page.equals(totalPage);
 
-        showFirstPage = !pages.contains(1);
+        showFirstPage = !pages.contains(1)&& page!=0;
 
         showEndPage = !pages.contains(totalPage);
+    }
+
+    public static void sortByHot(PaginationDTO paginationDTO) {
+        if(paginationDTO.questions == null){
+            return;
+        }
+        paginationDTO.questions.sort(Comparator.comparingInt(QuestionDTO::getViewCount));
     }
 }
