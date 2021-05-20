@@ -44,6 +44,6 @@ public class PaginationDTO {
         if(paginationDTO.questions == null){
             return;
         }
-        paginationDTO.questions.sort(Comparator.comparingInt(QuestionDTO::getViewCount));
+        paginationDTO.questions.sort((o1, o2) -> o2.getViewCount()-o1.getViewCount());
     }
 }

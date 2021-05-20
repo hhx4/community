@@ -45,4 +45,9 @@ public class ProfileController {
             model.addAttribute("pagination", paginationDTO);
             return "profile";
         }
+        @GetMapping("profile")
+        public String profile(){
+            return "profile";
+        }
+
 }

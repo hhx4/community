@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="icon" href="img/logo/community_logo.ico">
+    <title>社区系统</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.css">
+    <link rel="stylesheet" href="css/community.css">
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/bootstrap.min.js" type="application/javascript"></script>
+</head>
+<body>
+<div th:insert="navigation::nav"></div>
+<div class="about-box">
+    <P style="font-family: Calibri">
+        项目基于<a href="https://github.com/codedrinker/community">码问社区</a>和<a href="https://elasticsearch.cn/">elasticsearch中文社区</a>制作;在原项目上有一定改动和功能添加。感谢前人的帮助。</P>
+    <p>
+        项目地址:<a href="https://github.com/hhx4/community">https://github.com/hhx4/community</a>
+        <h5>项目简介</h5>
+        本项目是一个中文的微社区，用户可以在该页面上提问和回复以及常规的交互。实现了论坛的提问、点赞、评论以及问题和个人信息展示等基本功能。
+        <br>采用Bootstrap前端框架搭建的页面和SpringBoot + MyBatis实现的后端系统。
+        使用Thymeleaf作为web层模板展示；
+        开发过程使用工具：idea,maven,git<br>
+        <a href="http://mybatis.org/generator/">MyBatis Generator</a><br>
+        <a href="https://flywaydb.org/getstarted/firststeps/maven">Flyway</a><br>
+        <a href="http://mybatis.org/generator/">Lombok</a><br>
+        <a href="https://developer.github.com/apps/building-oauth-apps/creating-an-oauth-app/">Github OAuth</a><br>
+        <a href="https://github.com/ucloud/ufile-sdk-java">UFile</a><br>
+        一些插件：
+        ctotree,
+        ,Table of content sidebar
+        ,One Tab
+        ,Live Reload,
+        Postman<br>
+    </P>
+</div>
+<div th:insert="footer::footer"></div><!-- /.container-fluid -->
+</body>
+</html>
