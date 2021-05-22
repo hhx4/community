@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
  **/
 @Controller
 public class IndexController {
+    public static void main(String[] args) {
+
+    }
 
     @Autowired
     private QuestionService questionService;
@@ -25,11 +28,12 @@ public class IndexController {
         PaginationDTO pagination = questionService.list(page, size);
         model.addAttribute("section","");
         model.addAttribute("pagination", pagination);
+        System.out.println(pagination.getQuestions().get(0));
         return "index";
     }
 
     @GetMapping("/sort_type-hot-7")
-    public String listByhot(Model model,
+    public String listByHot(Model model,
                             @RequestParam(value = "page", defaultValue = "1") Integer page,
                             @RequestParam(value = "size", defaultValue = "5") Integer size) {
         PaginationDTO pagination = questionService.list(page, size);

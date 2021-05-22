@@ -1,5 +1,5 @@
 function post() {
-    var questionId = $("question_id").val();
+    var questionId = $("#question_id").val();
     var content = $("#comment_content").val();
     $.ajax({
         type:"post",
@@ -14,11 +14,17 @@ function post() {
             if(response.code == 200){
                 $("#comment_section").hide();
             }else {
+                if (response.code == 2003) {
+                    let isAccept = confirm(response.message);
+                    if(isAccept){
+                        window.open("https://github.com/login/oauth/authorize?client_id=02651f502284dafeea76&scope=user&state=1");
+                        window.localStorage.setItem("closable","true");
+                    }
+                }
                 alert(response.message);
             }
             console.log(response);
         },
         dataType:"json"
     });
-    console.log(questionId);
 }

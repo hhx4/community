@@ -1,15 +1,13 @@
 package life.wt.community.controller;
 
-import life.wt.community.dto.CommentDTO;
+import life.wt.community.dto.CommentCreateDTO;
 import life.wt.community.dto.ResultDTO;
 import life.wt.community.exception.CustomizeErrorCode;
-import life.wt.community.mapper.CommentMapper;
 import life.wt.community.model.Comment;
 import life.wt.community.model.User;
 import life.wt.community.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,7 +26,7 @@ public class CommentController {
     private CommentService commentService;
 
     @RequestMapping(value = "/comment", method = RequestMethod.POST)
-    public Object post(@RequestBody CommentDTO commentDTO, HttpServletRequest request) {
+    public Object post(@RequestBody CommentCreateDTO commentDTO, HttpServletRequest request) {
 
         User user = (User) request.getSession().getAttribute("user");
         if (user == null) {
