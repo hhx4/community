@@ -12,16 +12,15 @@ import life.wt.community.mapper.CommentMapper;
 import life.wt.community.mapper.QuestionExtMapper;
 import life.wt.community.mapper.QuestionMapper;
 import life.wt.community.mapper.UserMapper;
-import life.wt.community.model.Comment;
-import life.wt.community.model.CommentExample;
-import life.wt.community.model.Question;
-import life.wt.community.model.UserExample;
+import life.wt.community.model.*;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -66,17 +65,28 @@ public class CommentService {
         CommentExample commentExample = new CommentExample();
         commentExample.createCriteria().andParentIdEqualTo(id)
                 .andTypeEqualTo(CommentTypeEnum.QUESTION.getType());
+        commentExample.setOrderByClause("gmt_create desc");
         List<Comment> comments = commentMapper.selectByExample(commentExample);
         if (comments.size() == 0) {
             return new ArrayList<>();
         }
-        Set<Long> commentators = comments.stream().map(comment -> comment.getCommentCount()).collect(Collectors.toSet());
-        List<Long> userIds = new ArrayList<>();
-        userIds.addAll(commentators);
+        Set<Long> commentators = comments.stream().map(Comment::getObserver).collect(Collectors.toSet());
+        List<Long> userIds = new ArrayList<>(commentators);
         UserExample userExample = new UserExample();
 
         userExample.createCriteria()
-                .andIdIn(List\)
+                .andIdIn(userIds);
+        List<User> users = userMapper.selectByExample(userExample);
+
+        Map<Long, User> userMap = users.stream().collect(Collectors.toMap(User::getId, user -> user));
+
+        List<CommentDTO> commentDTOS = comments.stream().map(comment -> {
+
+            CommentDTO commentDTO = new CommentDTO();
+            BeanUtils.copyProperties(comment,commentDTO);
+            commentDTO.setUser(userMap.get(comment.getObserver()));
+            return commentDTO;
+        }).collect(Collectors.toList());
         return null;
 
     }
