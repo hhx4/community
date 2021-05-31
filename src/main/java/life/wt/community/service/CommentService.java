@@ -50,7 +50,7 @@ public class CommentService {
             }
             commentMapper.insert(comment);
         }else {
-
+            //回复评论
             Question question = questionMapper.selectByPrimaryKey(comment.getParentId());
             if (question == null) {
                 throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
@@ -61,7 +61,7 @@ public class CommentService {
         }
     }
 
-    public List<CommentDTO> listByQuestionId(Long id) {
+    public List<CommentDTO>  listByQuestionId(Long id) {
         CommentExample commentExample = new CommentExample();
         commentExample.createCriteria().andParentIdEqualTo(id)
                 .andTypeEqualTo(CommentTypeEnum.QUESTION.getType());
@@ -70,16 +70,19 @@ public class CommentService {
         if (comments.size() == 0) {
             return new ArrayList<>();
         }
+//        获取去重的评论人
         Set<Long> commentators = comments.stream().map(Comment::getObserver).collect(Collectors.toSet());
         List<Long> userIds = new ArrayList<>(commentators);
         UserExample userExample = new UserExample();
 
+        //获取评论人转换为map
         userExample.createCriteria()
                 .andIdIn(userIds);
         List<User> users = userMapper.selectByExample(userExample);
 
         Map<Long, User> userMap = users.stream().collect(Collectors.toMap(User::getId, user -> user));
 
+//        转换comment为dto
         List<CommentDTO> commentDTOS = comments.stream().map(comment -> {
 
             CommentDTO commentDTO = new CommentDTO();
@@ -87,7 +90,9 @@ public class CommentService {
             commentDTO.setUser(userMap.get(comment.getObserver()));
             return commentDTO;
         }).collect(Collectors.toList());
-        return null;
-
+        return commentDTOS;
     }
+
+//    public List<CommentDTO> listByTargetId(Long id, CommentTypeEnum comment) {
+//    }
 }

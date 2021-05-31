@@ -37,9 +37,24 @@ body{
 .community-comment{
     margin:10px 0;
 }
-.comment-btn{
+.btn-comment{
     float:right;
     margin-bottom: 10px;
+}
+.comment-sp{
+    margin-top: 0;
+}
+.menu-comment{
+    color: #999999;
+    margin-top: 15px;
+}
+.menu-comment .icon{
+    margin-right: 6px;
+    font-size: 15px;
+    cursor: pointer;
+}
+.menu-comment .icon:hover{
+    color: #499ef3;
 }
 .about-box{
     margin: 100px;

@@ -1,19 +1,20 @@
 package life.wt.community.controller;
 
 import life.wt.community.dto.CommentCreateDTO;
+import life.wt.community.dto.CommentDTO;
 import life.wt.community.dto.ResultDTO;
+import life.wt.community.enums.CommentTypeEnum;
 import life.wt.community.exception.CustomizeErrorCode;
 import life.wt.community.model.Comment;
 import life.wt.community.model.User;
 import life.wt.community.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -26,6 +27,7 @@ public class CommentController {
     private CommentService commentService;
 
     @RequestMapping(value = "/comment", method = RequestMethod.POST)
+    @ResponseBody
     public Object post(@RequestBody CommentCreateDTO commentDTO, HttpServletRequest request) {
 
         User user = (User) request.getSession().getAttribute("user");
@@ -42,8 +44,12 @@ public class CommentController {
         comment.setObserver(user.getId());
         comment.setLikeCount(0);
         commentService.insert(comment);
-        Map<Object, Object> objectObjectMap = new HashMap<>();
-        objectObjectMap.put("message","成功");
-        return objectObjectMap;
+        return ResultDTO.okOf();
     }
+  /*  @ResponseBody
+    @RequestMapping(value = "/comment/{id}", method = RequestMethod.GET)
+    public ResultDTO<List<CommentDTO>> comments(@PathVariable(name = "id") Long id) {
+        List<CommentDTO> commentDTOS = commentService.listByQuestionId(id, CommentTypeEnum.COMMENT);
+        return ResultDTO.okOf(commentDTOS);
+    }*/
 }

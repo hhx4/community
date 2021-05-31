@@ -23,7 +23,7 @@ public class CustomizeExceptionHandler {
     ModelAndView handle(Throwable e, Model model, HttpServletRequest request, HttpServletResponse response) {
         String contentType = request.getContentType();
         if ("application/json".equals(contentType)) {
-            ResultDTO resultDTO = null;
+            ResultDTO resultDTO;
             //返回json
             if(e instanceof CustomizeException){
                 resultDTO = ResultDTO.errorOf((CustomizeException) e);
