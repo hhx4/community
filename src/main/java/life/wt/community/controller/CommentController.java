@@ -8,14 +8,13 @@ import life.wt.community.exception.CustomizeErrorCode;
 import life.wt.community.model.Comment;
 import life.wt.community.model.User;
 import life.wt.community.service.CommentService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @created by wt at 2021-05-05 22:36
@@ -34,6 +33,9 @@ public class CommentController {
         if (user == null) {
             return ResultDTO.errorOf(CustomizeErrorCode.NO_LOGIN);
         }
+        if(commentDTO == null || StringUtils.isBlank(commentDTO.getContent())){
+            return ResultDTO.errorOf(CustomizeErrorCode.COMMENT_IS_EMPTY);
+        }
 
         Comment comment = new Comment();
         comment.setParentId(commentDTO.getParentId());
@@ -46,10 +48,10 @@ public class CommentController {
         commentService.insert(comment);
         return ResultDTO.okOf();
     }
-  /*  @ResponseBody
+    @ResponseBody
     @RequestMapping(value = "/comment/{id}", method = RequestMethod.GET)
     public ResultDTO<List<CommentDTO>> comments(@PathVariable(name = "id") Long id) {
-        List<CommentDTO> commentDTOS = commentService.listByQuestionId(id, CommentTypeEnum.COMMENT);
+        List<CommentDTO> commentDTOS = commentService.listByTargetId(id, CommentTypeEnum.COMMENT);
         return ResultDTO.okOf(commentDTOS);
-    }*/
+    }
 }

@@ -19,6 +19,9 @@ body{
 .media-body{
     padding-top: 10px;
 }
+.question-title{
+    margin-top: 25px;
+}
 .text-desc{
     font-size: 12px;
     font-weight: normal;
@@ -37,6 +40,17 @@ body{
 .community-comment{
     margin:10px 0;
 }
+.sub-comments {
+    border-radius: 5px;
+    margin-top: 10px;
+    border: 1px solid #eee;
+    padding-top: 15px;
+    margin-bottom: 10px;
+}
+.sub-comments .btn{
+    margin: 10px 0;
+}
+
 .btn-comment{
     float:right;
     margin-bottom: 10px;
@@ -49,9 +63,11 @@ body{
     margin-top: 15px;
 }
 .menu-comment .icon{
-    margin-right: 6px;
     font-size: 15px;
     cursor: pointer;
+}
+.menu-comment .active{
+    color: #499ef3;
 }
 .menu-comment .icon:hover{
     color: #499ef3;
