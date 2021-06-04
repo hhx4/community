@@ -22,6 +22,7 @@ public class QuestionController {
     private QuestionService questionService;
     @Autowired
     private CommentService commentService;
+
     @GetMapping("/question/{id}")
     public String question(@PathVariable(name = "id") Long id, Model model) {
         QuestionDTO questionDTO = questionService.getById(id);
@@ -30,8 +31,8 @@ public class QuestionController {
         List<CommentDTO> comments = commentService.listByTargetId(id, CommentTypeEnum.QUESTION);
         questionService.inView(id);
         model.addAttribute("question", questionDTO);
-        model.addAttribute("comments",comments);
-        model.addAttribute("relatedQuestions",relatedQuestions);
+        model.addAttribute("comments", comments);
+        model.addAttribute("relatedQuestions", relatedQuestions);
         return "question";
     }
 }
