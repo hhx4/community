@@ -2,6 +2,7 @@ package life.wt.community.controller;
 
 import life.wt.community.dto.PaginationDTO;
 import life.wt.community.model.User;
+import life.wt.community.service.NotificationService;
 import life.wt.community.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,8 @@ public class ProfileController {
 
     @Autowired
     private QuestionService questionService;
+    @Autowired
+    private NotificationService notificationService;
 
     @GetMapping("/profile/{action}")
     public String profile(HttpServletRequest request,
@@ -36,13 +39,14 @@ public class ProfileController {
             if ("questions".equals(action)) {
                 model.addAttribute("section", "questions");
                 model.addAttribute("sectionName", "我的提问");
+                PaginationDTO paginationDTO = questionService.list(user.getId(),page,size);
+                model.addAttribute("pagination", paginationDTO);
             } else if ("replies".equals(action)) {
+                PaginationDTO paginationDTO = notificationService.list(user.getId(), page, size);
                 model.addAttribute("section", "replies");
+                model.addAttribute("pagination", paginationDTO);
                 model.addAttribute("sectionName", "最新回复");
             }
-
-            PaginationDTO paginationDTO = questionService.listByUserId(user.getId(), page, size);
-            model.addAttribute("pagination", paginationDTO);
             return "profile";
         }
         @GetMapping("profile")

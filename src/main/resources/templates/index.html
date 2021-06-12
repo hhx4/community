@@ -28,7 +28,7 @@
                         <li role="presentation" th:class="${section == 'sort_type-hot-7'}?'active':''"><a href="/sort_type-hot-7">热门</a></li>
                     </ul>
             <br>
-            <div class="media" th:each="question:${pagination.questions}">
+            <div class="media" th:each="question:${pagination.data}">
             <hr>
                 <div class="media-left">
                     <a href="#">

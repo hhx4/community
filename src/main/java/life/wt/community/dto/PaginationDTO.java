@@ -8,8 +8,8 @@ import java.util.*;
  * @created by wt at 2021-05-01 10:59
  **/
 @Data
-public class PaginationDTO {
-    private List<QuestionDTO> questions;
+public class PaginationDTO<T> {
+    private List<T> data;
     private boolean showPrevious;
     private boolean showFirstPage;
     private boolean showNext;
@@ -41,9 +41,9 @@ public class PaginationDTO {
     }
 
     public static void sortByHot(PaginationDTO paginationDTO) {
-        if(paginationDTO.questions == null){
+        if(paginationDTO.data == null){
             return;
         }
-        paginationDTO.questions.sort((o1, o2) -> o2.getViewCount()-o1.getViewCount());
+//        paginationDTO.data.sort((o1, o2) -> o2.getViewCount()-o1.getViewCount());
     }
 }
